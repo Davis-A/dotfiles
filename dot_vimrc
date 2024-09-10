@@ -1,0 +1,37 @@
+syntax on
+colorscheme monokai
+set t_ut=""
+set relativenumber "set relative line number on sidebar
+set number "set absolute line number on side bar for current line
+set spell spelllang=en_us "set the spellcheck language
+set nospell "turn it off by default because it's annoying.  re-enable during use with :set spell
+set ignorecase "ignore case on search
+set hlsearch "highlight on search
+set tabstop=2
+set shiftwidth=2
+
+"Install plugin manager if it isn't already installed"
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+" Linter
+
+if v:version < 800
+  Plug 'dense-analysis/ale'
+endif
+" Bottom bar
+Plug 'itchyny/lightline.vim'
+" Highlight Yank
+Plug 'machakann/vim-highlightedyank' 
+"Setup highlighted yank for vim <8
+if v:version < 800
+  if !exists('##TextYankPost')
+    map y <Plug>(highlightedyank)
+  endif
+endif
+set laststatus=2
+call plug#end()

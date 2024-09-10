@@ -1,0 +1,6 @@
+ignorebin/
+ignorebin/**
+init/
+init/**
+todo.md
+readme.md

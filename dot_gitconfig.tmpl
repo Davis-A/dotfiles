@@ -1,0 +1,33 @@
+[color]
+  xbranch = auto
+  ui = auto
+[alias]
+  sl = log --decorate --oneline
+  ll = log --pretty=format:'%C(auto)%h %C(bold blue)%<(9,trunc)%aL%C(reset) %C(green)%cs%C(reset)  %s %C(auto)%d'
+  lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all -n 15
+  smartlog = log --graph --pretty=format:'commit: %C(bold red)%h%Creset %C(red)[%H]%Creset %C(bold magenta)%d %Creset%ndate: %C(bold yellow)%cd %Creset%C(yellow)%cr%Creset%nauthor: %C(bold blue)%an%Creset %C(blue)[%ae]%Creset%n%C(cyan)%s%n%Creset'
+  please = push --force-with-lease
+
+[core]
+  editor = vim
+[format]
+  pretty = fuller
+
+[user]
+  name = Andrew Davis
+{{- if (or (eq .chezmoi.hostname "carbon") (stat "/etc/inaboxinfo/"))  }}
+  email = adavis@fastmailteam.com
+{{- else }}
+  email = adavis@adavis.net
+{{- end }}
+
+{{- /* example conditional include 
+[includeIf "gitdir:~/src/"]
+  path = ~/.gitconfig-work
+*/}}
+{{ range $key, $value := .secrets.git }}
+[{{$key}}]
+  host = {{ $value.host }}
+  token = {{ $value.token }}
+{{- end }}
+

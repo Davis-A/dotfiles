@@ -1,0 +1,79 @@
+if status is-interactive
+  alias digs "dig +short"
+  alias less "less -I"
+  alias ...  "cd ../../"
+  alias src  "cd ~/src"
+  alias epoch "date +%s"
+  {{ if eq .chezmoi.osRelease.id "debian" }}alias fd "fdfind" {{- end }}
+  {{- if eq .chezmoi.hostname "carbon" }}
+  # BEGIN work alias
+  alias hm "cd ~/src/hm"
+  alias fmvars "cd ~/src/hm/conf/fmvars"
+  alias box "ssh box"
+  alias bbox "ssh bbox"
+  alias fm "ssh vpn1"
+  alias lab "ssh lab"
+  alias notes "cd ~/notes/"
+  alias chef "cd ~/src/triton/"
+  alias wiki "cd ~/wiki"
+  alias labpaste "nopaste -s GitLab -d"
+  # END work specific aliases
+  {{- end }}
+
+  {{- if stat "/etc/inaboxinfo/" }}
+  # BEGIN fminabox alias and abbreviations
+  alias hm "cd /home/mod_perl/hm"
+  alias fmvars "cd /home/mod_perl/hm/conf/fmvars"
+  # END fminabox alias and abbreviations
+  {{- end }}
+
+  {{- if lookPath "docker-compose" }}
+  abbr --add dc "docker-compose"
+  {{- end }}
+  abbr --add diffy "diff -ubBN"
+  {{- if lookPath "journalctl" }}
+  abbr --add flog "journalctl -a -f -u"
+  abbr --add llog "journalctl -a -e -u"
+  {{- end }}
+  abbr --add chezgit "cd $HOME/.local/share/chezmoi"
+  abbr --add dotconfig "cd $HOME/.local/share/chezmoi"
+
+  {{- if stat (joinPath .chezmoi.homeDir ".plenv") }}
+  # perl
+  _prepend_path $HOME/.plenv/bin
+  _prepend_path $HOME/.plenv/shims
+  {{ end }}
+  
+  {{- if stat (joinPath .chezmoi.homeDir ".local/go/bin") }}
+  # go
+  _prepend_path $HOME/.local/go/bin
+  {{ end }}
+
+  {{- if stat (joinPath .chezmoi.homeDir ".cargo/bin") }}
+  # rust
+  _prepend_path $HOME/.cargo/bin
+  {{ end }}
+
+  {{- if stat (joinPath .chezmoi.homeDir ".pyenv") }}
+  # python
+  _prepend_path $HOME/.pyenv/bin
+  _prepend_path $HOME/.pyenv/shims
+  {{ end }}
+
+  {{- if stat (joinPath .chezmoi.homeDir ".local/bin") }}
+  _prepend_path $HOME/.local/bin
+  {{ end }}
+
+  set -x RIPGREP_CONFIG_PATH "$HOME/.ripgrep"
+
+  {{- if eq .chezmoi.os "linux" }}{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+  # BEGIN WSL
+  # keychain checks $SHELL for what it outputs when using --eval
+  set -x SHELL '/usr/bin/fish'
+  keychain --quiet --ignore-missing --eval id_rsa id_ed25519 | source
+  set -e SHELL
+  # END WSL
+  {{- end }} {{ end }}
+end
+
+set fish_greeting
