@@ -1,6 +1,13 @@
 {{ if lookPath "fzf" }}
 # if fzf is installed the keybindings should have been added here:
 # /usr/share/fish/vendor_functions.d/fzf_key_bindings.fish
+# Fish should automatically source them from there
+
+{{- if eq .chezmoi.os "freebsd" }}
+# Except on freebsd where it's not in the right place to get sourced automatically
+source /usr/local/share/examples/fzf/shell/key-bindings.fish
+{{- end }}
+
 # This function just activates them
 function fish_user_key_bindings
 	fzf_key_bindings
