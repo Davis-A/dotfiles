@@ -4,7 +4,7 @@ set -g history-limit 200000
 
 {{- if eq .chezmoi.hostname "neon" }}
 set -g status-bg "#ff5f5f" 
-{{- else if eq .chezmoi.hostname "carbon" "Desktop-Win10" "arch-xps" }}
+{{- else if eq .chezmoi.hostname "carbon" "Desktop-win10" "arch-xps" }}
 set -g status-bg magenta
 {{- end }}
 {{- if stat "/etc/inaboxinfo/" }}
