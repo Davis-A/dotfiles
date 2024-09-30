@@ -1,0 +1,31 @@
+
+
+{{- if stat "/usr/share/doc/fzf/examples/key-bindings.bash" }}
+source /usr/share/doc/fzf/examples/key-bindings.bash
+{{- end }}
+
+
+# no longer use bash on my desktop/laptop so this is redundant
+# eval `keychain --quiet --eval --agents ssh id_rsa`
+
+if [ ! -z "$SSH_AUTH_SOCK" ] \
+  && [ ! -e "$HOME/.ssh/agent" ] \
+  && [ "$SSH_AUTH_SOCK" != "$HOME/.ssh/agent" ]; \
+then
+  ln -snf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent"
+  export SSH_AUTH_SOCK="$HOME/.ssh/agent"
+fi
+
+alias ..='cd ..'
+alias ...='cd ../../'
+
+alias chezgit="cd $HOME/.local/share/chezmoi"
+alias dotconfig="cd $HOME/.local/share/chezmoi"
+
+{{- if stat "/etc/fmenvironment" }}
+### work specific config from here ###
+source /etc/fmhome/bashrc
+alias fmvars="cd /home/mod_perl/hm/conf/fmvars"
+### work specific config ends here ###
+{{ end }}
+
