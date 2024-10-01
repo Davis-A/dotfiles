@@ -70,6 +70,8 @@ if status is-interactive
   set -x ANSIBLE_VAULT_PASSWORD_FILE "$HOME/.secrets/ansible_vault_pw"
   {{ end }}
 
+  set -x RIPGREP_CONFIG_PATH "$HOME/.ripgrep"
+
 
 
   {{- if eq .chezmoi.os "linux" }}{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
