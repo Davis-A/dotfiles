@@ -22,7 +22,7 @@ alias ...='cd ../../'
 alias chezgit="cd $HOME/.local/share/chezmoi"
 alias dotconfig="cd $HOME/.local/share/chezmoi"
 
-RIPGREP_CONFIG_PATH="$HOME/.ripgrep"
+export RIPGREP_CONFIG_PATH="$HOME/.ripgrep"
 
 {{- if stat "/etc/fmenvironment" }}
 ### work specific config from here ###
