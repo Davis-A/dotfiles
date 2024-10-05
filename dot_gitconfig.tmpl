@@ -28,9 +28,18 @@
 [includeIf "gitdir:~/src/"]
   path = ~/.gitconfig-work
 */}}
+
+{{ range $key, $value := .secrets.git }}
+[{{$key}}]
+{{- range $k, $v := $value }}
+{{$k}} = {{$v}}
+{{- end }}
+{{ end }}
+
+{{- /* 
 {{ range $key, $value := .secrets.git }}
 [{{$key}}]
   host = {{ $value.host }}
   token = {{ $value.token }}
 {{- end }}
-
+*/}}
