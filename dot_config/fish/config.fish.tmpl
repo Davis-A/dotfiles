@@ -32,7 +32,7 @@ if status is-interactive
   abbr --add dc "docker-compose"
   {{- end }}
   {{ if (and (lookPath "uvx") (not (lookPath "ansible"))) }}
-  abbr -add ansible "uvx --from ansible-core ansible"
+  abbr --add ansible "uvx --from ansible-core ansible"
   {{end}}
   abbr --add diffy "diff -ubBN"
   {{- if lookPath "journalctl" }}
