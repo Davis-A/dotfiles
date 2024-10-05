@@ -74,7 +74,7 @@ if status is-interactive
   {{ end }}
 
   set -x RIPGREP_CONFIG_PATH "$HOME/.ripgrep"
-
+  {{ if lookPath "vim"}}set -x EDITOR {{ lookPath "vim"}}{{- end }}
 
 
   {{- if eq .chezmoi.os "linux" }}{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
