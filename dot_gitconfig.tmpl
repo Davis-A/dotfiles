@@ -29,9 +29,4 @@
   path = ~/.gitconfig-work
 */}}
 
-{{ range $key, $value := .secrets.git }}
-[{{$key}}]
-{{- range $k, $v := $value }}
-{{$k}} = {{$v}}
-{{- end }}
-{{ end }}
+{{ .secrets.git | toIni }}
