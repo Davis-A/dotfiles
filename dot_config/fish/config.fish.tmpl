@@ -31,9 +31,13 @@ if status is-interactive
   {{- if lookPath "docker-compose" }}
   abbr --add dc "docker-compose"
   {{- end }}
-  {{ if (and (lookPath "uvx") (not (lookPath "ansible"))) }}
-  abbr --add ansible "uvx --from ansible-core ansible"
-  {{end}}
+
+  {{- if (and (lookPath "uvx") (lookPath "uv") )}}
+  # uv/uvx can run python stuff ad-hoc.  Use it if the thing doesn't already exist
+  {{ if not (lookPath "python")  }}abbr --add python "uv run python"{{- end }}
+  {{ if not (lookPath "ansible") }}abbr --add ansible "uvx --from ansible-core ansible"{{- end }}
+  {{ if not (lookPath "yt-dlp")  }}abbr --add yt-dlp "uvx yt-dlp"{{- end }}
+  {{- end }}
   abbr --add diffy "diff -ubBN"
   {{- if lookPath "journalctl" }}
   abbr --add flog "journalctl -a -f -u"
