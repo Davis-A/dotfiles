@@ -3,9 +3,12 @@
 # /usr/share/fish/vendor_functions.d/fzf_key_bindings.fish
 # Fish should automatically source them from there
 
+{{- /* Newer versions of fzf aren't packaging completions in files and instead expect you to invoke fzf --$SHELL 
+	   FreeBSD ports have moved to not package the files so for now just detect that
+*/}}
 {{- if eq .chezmoi.os "freebsd" }}
 # Except on freebsd where it's not in the right place to get sourced automatically
-source /usr/local/share/examples/fzf/shell/key-bindings.fish
+fzf --fish | source
 {{- end }}
 
 # This function just activates them
