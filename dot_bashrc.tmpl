@@ -30,6 +30,12 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgrep"
 {{- if stat "/etc/fmenvironment" }}
 ### work specific config from here ###
 source /etc/fmhome/bashrc
+if [ $UID = 0 ]; then
+    __userhost="\[\033[1;32m\]root($FMADMIN)@\h$__inabox_name\[\033[0m\]$__dc_color"
+  PS1_BASE="$__dc_color[$FMENVIRONMENT $__userhost \W]"
+  PS1_END="\\\$\[\033[0m\] "
+fi
+
 alias fmvars="cd /home/mod_perl/hm/conf/fmvars"
 ### work specific config ends here ###
 {{ end }}
