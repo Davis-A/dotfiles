@@ -46,6 +46,7 @@ if status is-interactive
   {{- end }}
   abbr --add chezgit "cd $HOME/.local/share/chezmoi"
   abbr --add dotconfig "cd $HOME/.local/share/chezmoi"
+  abbr --add dotfiles "cd $HOME/.local/share/chezmoi"
 
   {{- if stat (joinPath .chezmoi.homeDir ".plenv") }}
   # perl
