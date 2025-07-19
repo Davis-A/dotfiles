@@ -52,6 +52,13 @@ if status is-interactive
   # perl
   _prepend_path $HOME/.plenv/bin
   _prepend_path $HOME/.plenv/shims
+
+  {{ end }}
+
+  {{- if stat (joinPath .chezmoi.homeDir ".rbenv") }}
+  # ruby
+  _prepend_path $HOME/.rbenv/bin
+  _prepend_path $HOME/.rbenv/shims
   {{ end }}
   
   {{- if stat (joinPath .chezmoi.homeDir ".local/go/bin") }}
