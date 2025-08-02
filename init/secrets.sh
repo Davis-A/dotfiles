@@ -13,7 +13,8 @@ if [ ! -f $SECRETS_FILE ]; then
 fi
 
 # also setup a local.toml, it's not for secrets but i'm doing basically the same thing
-CHEZMOI_PATH=`chezmoi source-path`
+
+CHEZMOI_PATH="$HOME/.local/share/chezmoi"
 LOCAL_FILE="$CHEZMOI_PATH/.chezmoidata/local.toml"
 if [ ! -f $LOCAL_FILE ]; then
   # it's fine if we're missing keys under .secrets
