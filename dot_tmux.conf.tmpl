@@ -12,3 +12,8 @@ set -g status-bg magenta
 {{- /* Can't assume /usr/bin/fish because FreeBSD has it in /usr/local/bin/fish */}}
 set-option -g default-shell {{ lookPath "fish" }}
 {{ end }}
+
+# dim out the inactive pane(s)
+set-window-option -g window-style fg=white,bg=colour235
+set-window-option -g window-active-style fg=white,bg=colour0
+
