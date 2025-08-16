@@ -75,6 +75,11 @@ if status is-interactive
   _prepend_path $HOME/.pyenv/shims
   {{ end }}
 
+  {{- if stat (joinPath .chezmoi.homeDir ".opam/default/bin") }}
+  # ocaml
+  _prepend_path $HOME/.opam/default/bin
+  {{ end }}
+
   {{- if stat (joinPath .chezmoi.homeDir ".local/bin") }}
   _prepend_path $HOME/.local/bin
   {{ end }}
