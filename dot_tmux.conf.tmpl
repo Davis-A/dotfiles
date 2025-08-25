@@ -13,4 +13,8 @@ set -g status-bg magenta
 set-option -g default-shell {{ lookPath "fish" }}
 {{ end }}
 
+# stop weird characters on attach
+# https://www.reddit.com/r/tmux/comments/1l7n9k9/what_are_these_strange_characters/
+set -g escape-time 500
+
 
