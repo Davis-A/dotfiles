@@ -29,7 +29,7 @@ if status is-interactive
 
   {{- if lookPath "docker-compose" }}
   abbr --add dc "docker-compose"
-  abbr --add pullup "docker-compse pull; docker-compose up -d"
+  abbr --add pullup "docker-compose pull; docker-compose up -d"
   {{- end }}
 
   {{- if (and (lookPath "uvx") (lookPath "uv") )}}
