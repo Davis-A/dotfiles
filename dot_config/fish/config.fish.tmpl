@@ -47,6 +47,13 @@ if status is-interactive
   abbr --add dotconfig "cd $HOME/.local/share/chezmoi"
   abbr --add dotfiles "cd $HOME/.local/share/chezmoi"
 
+
+  {{- if stat "/opt/cinc/bin" }}
+  # chef/cinc
+  # omni-installer instructions => https://cinc.sh/start/client/
+  _prepend_path /opt/cinc/bin
+  {{ end }}
+
   {{- if stat (joinPath .chezmoi.homeDir ".plenv") }}
   # perl
   _prepend_path $HOME/.plenv/bin
