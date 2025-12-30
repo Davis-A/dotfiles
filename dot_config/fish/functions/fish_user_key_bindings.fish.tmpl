@@ -6,7 +6,7 @@
 {{- /* Newer versions of fzf aren't packaging completions in files and instead expect you to invoke fzf --$SHELL 
 	   FreeBSD ports have moved to not package the files so for now just detect that
 */}}
-{{- if eq .chezmoi.os "freebsd" }}
+{{- if eq .chezmoi.os "freebsd" "darwin"}}
 # Except on freebsd where it's not in the right place to get sourced automatically
 fzf --fish | source
 {{- end }}

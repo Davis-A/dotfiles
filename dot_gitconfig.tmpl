@@ -20,7 +20,7 @@
 
 [user]
   name = Andrew Davis
-{{- if (or (eq .chezmoi.hostname "carbon") (stat "/etc/inaboxinfo/"))  }}
+{{- if (or (eq .chezmoi.hostname "carbon" "air") (stat "/etc/inaboxinfo/"))  }}
   email = adavis@fastmailteam.com
 {{- else }}
   email = adavis@adavis.net
