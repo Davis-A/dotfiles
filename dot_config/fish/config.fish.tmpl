@@ -113,7 +113,7 @@ if status is-interactive
   {{- if eq .chezmoi.os "darwin"}}
   # See native MacOS Secure Enclave backed ssh keys, see https://gist.github.com/arianvp/5f59f1783e3eaf1a2d4cd8e952bb4acfkey 
   # check if key is known to ssh agent, if it's not trigger it to load
-  if perl -E '$found = grep { $_ =~ /^sk-ecdsa-sha2-nistp256/ } `ssh-add -L`; $found ? exit 1 : exit 0;';
+  if perl -E '(grep { $_ =~ /^sk-ecdsa-sha2-nistp256/ } `ssh-add -L`) ? exit 1 : exit 0;';
     echo "~~~ Loading ssh key from secure enclave.  Please touch the finger print reader then hit enter ⏎ ~~~"
     ssh-add -K -S /usr/lib/ssh-keychain.dylib
   end
