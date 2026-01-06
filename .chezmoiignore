@@ -4,3 +4,8 @@ init/
 init/**
 todo.md
 readme.md
+### Macos Only config ###
+{{- if (ne .chezmoi.os "darwin")}}
+Library 
+{{- end }}
+### End MacOS Only config ###
