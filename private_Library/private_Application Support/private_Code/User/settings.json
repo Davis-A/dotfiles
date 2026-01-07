@@ -2,5 +2,8 @@
     "remote.SSH.defaultExtensions": [
         "eamodio.gitlens",
         "tamasfe.even-better-toml"
-    ]
+    ],
+    "[perl]": {
+        "editor.tabSize": 2
+    }
 }
