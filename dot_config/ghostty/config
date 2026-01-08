@@ -53,3 +53,4 @@
 shell-integration-features = ssh-terminfo,ssh-env
 
 theme = Catppuccin Frappe
+right-click-action = copy-or-paste
