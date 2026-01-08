@@ -50,7 +50,7 @@
 
 # Send over term info and get `tic` to install it.  If that doesn't work fallback to tell ssh via an env variable to set TERM=xterm-256
 # see https://ghostty.org/docs/help/terminfo 2026-01-06
-shell-integration-features = ssh-terminfo,ssh-env
+shell-integration-features = ssh-env
 
 theme = Catppuccin Frappe
 right-click-action = copy-or-paste
