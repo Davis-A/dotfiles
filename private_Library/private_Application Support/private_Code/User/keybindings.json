@@ -1,7 +1,18 @@
 // Place your key bindings in this file to override the defaults
-[{
-    "key": "shift+delete",
-    "command": "editor.action.deleteLines",
-    "when": "editorTextFocus"
-}
+[
+    {
+        "key": "shift+delete",
+        "command": "editor.action.deleteLines",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.nextEditor",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.previousEditor",
+        "when": "editorTextFocus"
+    },
 ]
