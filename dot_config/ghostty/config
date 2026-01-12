@@ -54,3 +54,5 @@ shell-integration-features = ssh-env
 
 theme = Catppuccin Frappe
 right-click-action = copy-or-paste
+
+font-feature = -calt, -liga, -dlig 
