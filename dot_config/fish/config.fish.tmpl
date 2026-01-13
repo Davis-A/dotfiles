@@ -48,6 +48,11 @@ if status is-interactive
   abbr --add dotfiles "cd $HOME/.local/share/chezmoi"
 
 
+  {{- if (and (eq .chezmoi.os "darwin") (stat "/opt/homebrew"))}}
+  _prepend_path /opt/homebrew/bin
+  _prepend_path /opt/homebrew/sbin
+  {{- end }}
+
   {{- if stat "/opt/cinc/bin" }}
   # chef/cinc
   # omni-installer instructions => https://cinc.sh/start/client/
