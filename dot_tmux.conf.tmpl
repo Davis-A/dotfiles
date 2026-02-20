@@ -11,6 +11,11 @@ set -g status-bg magenta
 {{- else }}
 {{- /* Can't assume /usr/bin/fish because FreeBSD has it in /usr/local/bin/fish */}}
 set-option -g default-shell {{ lookPath "fish" }}
+{{- if eq .chezmoi.os "darwin" }}
+# On login shells MacOS /etc/profile runs a thing calls path_helper which prepends all the system paths to my $PATH even if they're already present 
+# As a result, if i'm already in fish and start tmux then the system paths end up before all my prepend path config
+set-option -g default-command {{ lookPath "fish" }}
+{{- end }}
 {{ end }}
 
 # stop weird characters on attach
