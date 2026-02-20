@@ -43,9 +43,11 @@ function _prepend_path
 
   for path in $path
     if test -d $path
-      if not contains $path $$destination_path
-        set $destination_path $path $$destination_path
+      if contains $path $$destination_path
+        set -l idx (contains -i $path $$destination_path)
+        set $destination_path (string join \n $$destination_path | string match -v $path)
       end
+      set $destination_path $path $$destination_path
     end
   end
 end
