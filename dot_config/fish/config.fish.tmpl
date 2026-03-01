@@ -106,14 +106,12 @@ if status is-interactive
   {{ if lookPath "vim"}}set -x EDITOR {{ lookPath "vim"}}{{- end }}
 
 
-  {{- if eq .chezmoi.os "linux" }}{{ if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-  # BEGIN WSL
+ {{- if eq .chezmoi.hostname "carbon" "air" }}
   # keychain checks $SHELL for what it outputs when using --eval
-  set -x SHELL '/usr/bin/fish'
+  set -x SHELL '{{ lookPath "fish" }}'
   keychain --quiet --ignore-missing --eval id_rsa id_ed25519 | source
   set -e SHELL
-  # END WSL
-  {{- end }} {{ end }}
+{{- end }}
 
   {{- if eq .chezmoi.os "darwin"}}
   # See native MacOS Secure Enclave backed ssh keys, see https://gist.github.com/arianvp/5f59f1783e3eaf1a2d4cd8e952bb4acfkey 
