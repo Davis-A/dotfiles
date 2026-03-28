@@ -106,7 +106,7 @@ if status is-interactive
   {{ if lookPath "vim"}}set -x EDITOR {{ lookPath "vim"}}{{- end }}
 
 
- {{- if eq .chezmoi.hostname "carbon" "air" }}
+ {{- if eq .chezmoi.hostname "carbon" "air" "xenon" "arch-xps" }}
   # keychain checks $SHELL for what it outputs when using --eval
   set -x SHELL '{{ lookPath "fish" }}'
   keychain --quiet --ignore-missing --eval id_rsa id_ed25519 | source
