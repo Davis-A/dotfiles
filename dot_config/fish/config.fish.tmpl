@@ -43,9 +43,9 @@ if status is-interactive
   abbr --add flog "journalctl -a -f -u"
   abbr --add llog "journalctl -a -e -u"
   {{- end }}
-  {{- if and (eq .chezmoi.os "freebsd") (stat "/var/log/sv") }}
-  function flog; tail -F /var/log/sv/$argv[1]/current; end
-  function llog; less /var/log/sv/$argv[1]/current; end
+  {{- if and (stat "/var/log/sv") (not (lookPath "journalctl")) }}
+  abbr --add flog "sv tail"
+  abbr --add llog "sv log"
   {{- end }}
   abbr --add chezgit "cd $HOME/.local/share/chezmoi"
   abbr --add dotconfig "cd $HOME/.local/share/chezmoi"
@@ -62,6 +62,10 @@ if status is-interactive
   # omni-installer instructions => https://cinc.sh/start/client/
   _prepend_path /opt/cinc/bin
   {{ end }}
+
+  {{- if stat "/opt/bin" }}
+  _prepend_path /opt/bin
+  {{- end }}
 
   {{- if stat (joinPath .chezmoi.homeDir ".plenv") }}
   # perl
