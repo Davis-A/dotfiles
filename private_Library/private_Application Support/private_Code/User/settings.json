@@ -5,5 +5,11 @@
     ],
     "[perl]": {
         "editor.tabSize": 2
-    }
+    },
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "claudeCode.preferredLocation": "panel",
+
+    // Disable Copilot / built-in AI UI bits
+    "chat.agent.enabled": false,
+    "editor.inlineSuggest.enabled": false
 }
