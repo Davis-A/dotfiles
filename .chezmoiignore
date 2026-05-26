@@ -6,6 +6,12 @@ todo.md
 readme.md
 ### Macos Only config ###
 {{- if (ne .chezmoi.os "darwin")}}
-Library 
+Library
 {{- end }}
 ### End MacOS Only config ###
+
+### FreeBSD only config ###
+{{- if not (and (eq .chezmoi.os "freebsd") (lookPath "sv")) }}
+.config/fish/functions/sv.fish
+{{- end }}
+### End FreeBSD only config ###
