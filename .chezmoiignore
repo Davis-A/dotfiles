@@ -9,6 +9,11 @@ readme.md
 Library
 {{- end }}
 ### End MacOS Only config ###
+### Linux only config ###
+{{- if (ne .chezmoi.os "linux")}}
+.config/Code
+{{- end }}
+### End Linux only config ###
 
 ### FreeBSD only config ###
 {{- if not (and (eq .chezmoi.os "freebsd") (lookPath "sv")) }}
