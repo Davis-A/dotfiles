@@ -5,7 +5,9 @@ if status is-interactive
   alias src  "cd ~/src"
   alias epoch "date +%s"
   alias t "tmux new -A -s base"
-  {{ if eq .chezmoi.osRelease.id "debian" }}alias fd "fdfind" {{- end }}
+  {{- if lookPath "fdfind" }}
+  alias fd "fdfind"
+  {{- end }}
   {{- if eq .chezmoi.hostname "carbon" "air" }}
   # BEGIN work alias
   alias hm "cd ~/src/hm"
