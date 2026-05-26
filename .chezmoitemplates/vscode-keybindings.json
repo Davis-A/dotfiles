@@ -15,6 +15,7 @@
         "command": "workbench.action.previousEditorInGroup",
         "when": "editorTextFocus"
     },
+    {{- if eq .chezmoi.os "darwin" }}
     {
         "key": "cmd+down",
         "command": "editor.action.moveLinesDownAction",
@@ -35,4 +36,5 @@
         "command": "-editor.action.moveLinesUpAction",
         "when": "editorTextFocus && !editorReadonly"
     },
+    {{- end }}
 ]
