@@ -56,3 +56,6 @@ theme = Catppuccin Frappe
 right-click-action = copy-or-paste
 
 font-feature = -calt, -liga, -dlig 
+window-inherit-working-directory = false
+#tab-inherit-working-directory = false
+
