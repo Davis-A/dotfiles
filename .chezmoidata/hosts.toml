@@ -1,0 +1,12 @@
+# Per-host attributes. Tags control which template branches a host opts
+# into. Unknown hosts get no tags (and so no special-case behavior).
+[hosts.carbon]
+tags = ["workstation"]
+[hosts.air]
+tags = ["work", "workstation"]
+[hosts.xenon]
+tags = ["workstation"]
+[hosts.arch-xps]
+tags = ["workstation"]
+[hosts.neon]
+tags = ["server"]

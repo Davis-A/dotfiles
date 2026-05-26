@@ -1,3 +1,4 @@
+{{- $tags := dig .chezmoi.hostname "tags" (list) .hosts -}}
 [color]
   xbranch = auto
   ui = auto
@@ -20,7 +21,7 @@
 
 [user]
   name = Andrew Davis
-{{- if (or (eq .chezmoi.hostname "carbon" "air") (stat "/etc/inaboxinfo/"))  }}
+{{- if (or (has "work" $tags) (stat "/etc/inaboxinfo/"))  }}
   email = adavis@fastmailteam.com
 {{- else }}
   email = adavis@adavis.net

@@ -1,3 +1,4 @@
+{{- $tags := dig .chezmoi.hostname "tags" (list) .hosts -}}
 if status is-interactive
   alias digs "dig +short"
   alias less "less -I"
@@ -8,7 +9,7 @@ if status is-interactive
   {{- if lookPath "fdfind" }}
   alias fd "fdfind"
   {{- end }}
-  {{- if eq .chezmoi.hostname "carbon" "air" }}
+  {{- if has "work" $tags }}
   # BEGIN work alias
   alias hm "cd ~/src/hm"
   alias fmvars "cd ~/src/hm/conf/fmvars"
@@ -116,7 +117,7 @@ if status is-interactive
   {{ if lookPath "vim"}}set -x EDITOR {{ lookPath "vim"}}{{- end }}
 
 
- {{- if eq .chezmoi.hostname "carbon" "air" "xenon" "arch-xps" }}
+ {{- if has "workstation" $tags }}
   # keychain checks $SHELL for what it outputs when using --eval
   set -x SHELL '{{ lookPath "fish" }}'
   keychain --quiet --ignore-missing --eval id_rsa id_ed25519 | source

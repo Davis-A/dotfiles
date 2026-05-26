@@ -1,10 +1,11 @@
+{{- $tags := dig .chezmoi.hostname "tags" (list) .hosts -}}
 set -g default-terminal "tmux-256color"
 
 set -g history-limit 200000
 
 {{- if eq .chezmoi.hostname "neon" }}
-set -g status-bg "#ff5f5f" 
-{{- else if eq .chezmoi.hostname "carbon" "air" "xenon" "arch-xps" }}
+set -g status-bg "#ff5f5f"
+{{- else if has "workstation" $tags }}
 set -g status-bg magenta
 {{- end }}
 {{- if stat "/etc/inaboxinfo/" }}
