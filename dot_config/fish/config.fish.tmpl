@@ -113,6 +113,15 @@ if status is-interactive
   set -x ANSIBLE_VAULT_PASSWORD_FILE "$HOME/.secrets/ansible_vault_pw"
   {{ end }}
 
+  # Keep a stable symlink to the latest forwarded ssh agent socket, so
+  # shells inside tmux survive detach/reattach (see also tmux.conf).
+  if test -n "$SSH_AUTH_SOCK"; and test "$SSH_AUTH_SOCK" != "$HOME/.ssh/agent.socket"
+    if test -z "$TMUX"
+      ln -snf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent.socket"
+    end
+    set -x SSH_AUTH_SOCK "$HOME/.ssh/agent.socket"
+  end
+
   set -x RIPGREP_CONFIG_PATH "$HOME/.ripgrep"
   {{ if lookPath "vim"}}set -x EDITOR {{ lookPath "vim"}}{{- end }}
 

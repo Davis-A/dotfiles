@@ -8,11 +8,14 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 # no longer use bash on my desktop/laptop so this is redundant
 # eval `keychain --quiet --eval --agents ssh id_rsa`
 
-if [ ! -z "$SSH_AUTH_SOCK" ] \
-  && [ ! -e "$HOME/.ssh/agent.socket" ] \
+# Keep a stable symlink to the latest forwarded ssh agent socket, so
+# shells inside tmux survive detach/reattach.  Only update if it's dead
+if [ -n "$SSH_AUTH_SOCK" ] \
   && [ "$SSH_AUTH_SOCK" != "$HOME/.ssh/agent.socket" ]; \
 then
-  ln -snf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent.socket"
+  if [ -z "$TMUX" ]; then
+    ln -snf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent.socket"
+  fi
   export SSH_AUTH_SOCK="$HOME/.ssh/agent.socket"
 fi
 

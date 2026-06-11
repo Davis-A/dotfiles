@@ -18,4 +18,11 @@ set-option -g default-shell {{ lookPath "fish" }}
 # https://www.reddit.com/r/tmux/comments/1l7n9k9/what_are_these_strange_characters/
 set -g escape-time 500
 
+# Always use the stable agent-socket symlink (maintained by the shell rc
+# on login) instead of the per-connection /tmp/ssh-*/agent.* path, so new
+# panes work after detach/reattach. Drop SSH_AUTH_SOCK from
+# update-environment so attaching clients don't overwrite it.
+set -g update-environment "DISPLAY KRB5CCNAME SSH_ASKPASS SSH_AGENT_PID SSH_CONNECTION WINDOWID XAUTHORITY"
+setenv -g SSH_AUTH_SOCK "{{ .chezmoi.homeDir }}/.ssh/agent.socket"
+
 
