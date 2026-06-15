@@ -1,13 +1,9 @@
 {{ if lookPath "fzf" }}
-# if fzf is installed the keybindings should have been added here:
-# /usr/share/fish/vendor_functions.d/fzf_key_bindings.fish
-# Fish should automatically source them from there
 
-{{- /* Newer versions of fzf aren't packaging completions in files and instead expect you to invoke fzf --$SHELL 
-	   FreeBSD ports have moved to not package the files so for now just detect that
+{{- /* Newer versions of fzf don't ship key binding files and instead use `fzf --fish`.
+	   Work still on Debian bookworm which doesn't support --fish so we'll just get it from files.
 */}}
-{{- if eq .chezmoi.os "freebsd" "darwin"}}
-# Except on freebsd where it's not in the right place to get sourced automatically
+{{- if not (stat "/usr/share/fish/vendor_functions.d/fzf_key_bindings.fish") }}
 fzf --fish | source
 {{- end }}
 
