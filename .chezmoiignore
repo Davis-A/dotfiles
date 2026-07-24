@@ -4,6 +4,7 @@ init/
 init/**
 todo.md
 readme.md
+notes.md
 ### Macos Only config ###
 {{- if (ne .chezmoi.os "darwin")}}
 Library
