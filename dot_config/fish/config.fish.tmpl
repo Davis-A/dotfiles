@@ -114,9 +114,12 @@ if status is-interactive
   {{ end }}
 
   # Keep a stable symlink to the latest forwarded ssh agent socket, so
-  # shells inside tmux survive detach/reattach (see also tmux.conf).
-  if test -n "$SSH_AUTH_SOCK"; and test "$SSH_AUTH_SOCK" != "$HOME/.ssh/agent.socket"
-    if test -z "$TMUX"
+  # shells inside tmux survive detach/reattach (see also tmux.conf).  Never
+  # adopt a path already under ~/.ssh: host config likely manages its own
+  # link there, and pointing the two at each other gives "Too many levels
+  # of symbolic links".
+  if test -n "$SSH_AUTH_SOCK"; and not string match -q -- "$HOME/.ssh/*" "$SSH_AUTH_SOCK"
+    if test -z "$TMUX"; and test -S "$SSH_AUTH_SOCK"
       ln -snf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent.socket"
     end
     set -x SSH_AUTH_SOCK "$HOME/.ssh/agent.socket"

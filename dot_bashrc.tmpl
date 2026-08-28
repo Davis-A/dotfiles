@@ -9,15 +9,18 @@ source /usr/share/doc/fzf/examples/key-bindings.bash
 # eval `keychain --quiet --eval --agents ssh id_rsa`
 
 # Keep a stable symlink to the latest forwarded ssh agent socket, so
-# shells inside tmux survive detach/reattach.  Only update if it's dead
-if [ -n "$SSH_AUTH_SOCK" ] \
-  && [ "$SSH_AUTH_SOCK" != "$HOME/.ssh/agent.socket" ]; \
-then
-  if [ -z "$TMUX" ]; then
-    ln -snf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent.socket"
-  fi
-  export SSH_AUTH_SOCK="$HOME/.ssh/agent.socket"
-fi
+# shells inside tmux survive detach/reattach.  Never adopt a path already
+# under ~/.ssh: host config likely manages its own link there, and pointing
+# the two at each other gives "Too many levels of symbolic links".
+case "$SSH_AUTH_SOCK" in
+  ''|"$HOME"/.ssh/*) ;;
+  *)
+    if [ -z "$TMUX" ] && [ -S "$SSH_AUTH_SOCK" ]; then
+      ln -snf "$SSH_AUTH_SOCK" "$HOME/.ssh/agent.socket"
+    fi
+    export SSH_AUTH_SOCK="$HOME/.ssh/agent.socket"
+    ;;
+esac
 
 alias ..='cd ..'
 alias ...='cd ../../'
